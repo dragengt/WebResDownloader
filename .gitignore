@@ -1,0 +1,6 @@
+*.rar
+*.svn/
+*Repository/
+Debug/
+bin/Debug/
+bin/Release/

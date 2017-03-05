@@ -27,9 +27,12 @@ namespace WebDownloader.Classes
         /// <param name="saveToFolder">保存的地址</param>
         public static bool StartDownloader(string linkAddress, string saveToFolder)
         {
-            
+            Debug.LogToUser("开始下载>>>");
+
             //默认直接下载图片
             DownloadImages(linkAddress,saveToFolder);
+
+            
 
             return true;    
             
@@ -87,16 +90,16 @@ namespace WebDownloader.Classes
                                     #region 开始这个下载：
                                     //--构建下载名：
 
-                                    //--TODO：填充为N位数而不是左边填值的问题！
-                                    string link = string.Format("{0}"+indexNameFormat+"{2}", linkPrefix, currIndex, postFix);
+                                    //填充为N位数保持格式
+                                    string link = string.Format("{0}" + indexNameFormat + "{2}", linkPrefix, currIndex, postFix);
 
                                     Debug.Log("Will go to :" + link);
 
-                                    string fileName = saveToFolder +"/"+ currIndex+postFix;
-                                    
+                                    string fileName = saveToFolder + "/" + currIndex + postFix;
+
                                     Debug.Log("File name :" + fileName);
 
-                                    DownloadWebData(link, fileName , cbOnDownloadData);
+                                    DownloadWebData(link, fileName, cbOnDownloadData);
                                     #endregion
 
                                     currIndex++;
@@ -110,6 +113,8 @@ namespace WebDownloader.Classes
                                 if (failedCount >= DOWNLOAD_FILE_STEP_COUNT)
                                 {
                                     Debug.Log("Too many error , quit thread.");
+
+                                    Debug.LogToUser("看起来后面的没什么能下载的，应该下载完成了。");
                                     break;
                                 }
                             }
@@ -118,12 +123,15 @@ namespace WebDownloader.Classes
                     threadDoAdd.Start();
                     #endregion
 
-
                 }
                 else
                 {
-                    Debug.Log("something wrong...cannot parse the link number.");
+                    Debug.LogToUser(":( 看起来解析的地址出了点错误。");
                 }
+            }
+            else
+            {
+                Debug.LogToUser("看起来……这个网址不是图片的链接。");
             }
         }
 
@@ -231,6 +239,11 @@ namespace WebDownloader.Classes
                         if (cbOnThreadFin != null)
                         {
                             cbOnThreadFin(isSuc);
+
+                            if (isSuc)
+                            {
+                                Debug.LogToUser("下载完了:" + FileNameToSave);
+                            }
                         }
                     }
 

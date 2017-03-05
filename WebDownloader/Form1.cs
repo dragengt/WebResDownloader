@@ -41,5 +41,25 @@ namespace WebDownloader
 
             Downloader.StartDownloader(linkAddress,saveToFolder);
         }
+
+        private void btn_broswer_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog browserDialog = new FolderBrowserDialog();
+            DialogResult result = browserDialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                tb_saveTo.Text = browserDialog.SelectedPath;
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+
+            MyDebug.Debug.SetCallbackLogStr((strMsg) =>
+                {
+                    lb_logView.Items.Add(strMsg);
+                });
+        }
     }
 }

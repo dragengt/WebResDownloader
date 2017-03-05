@@ -35,7 +35,7 @@
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.tb_saveTo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lb_logView = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -77,6 +77,7 @@
             this.btn_broswer.TabIndex = 2;
             this.btn_broswer.Text = "browser";
             this.btn_broswer.UseVisualStyleBackColor = true;
+            this.btn_broswer.Click += new System.EventHandler(this.btn_broswer_Click);
             // 
             // tb_saveTo
             // 
@@ -97,14 +98,16 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Save To";
             // 
-            // listBox1
+            // lb_logView
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 129);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(267, 88);
-            this.listBox1.TabIndex = 3;
+            this.lb_logView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lb_logView.FormattingEnabled = true;
+            this.lb_logView.ItemHeight = 12;
+            this.lb_logView.Location = new System.Drawing.Point(12, 129);
+            this.lb_logView.Name = "lb_logView";
+            this.lb_logView.Size = new System.Drawing.Size(267, 88);
+            this.lb_logView.TabIndex = 3;
             // 
             // label3
             // 
@@ -121,7 +124,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lb_logView);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tb_saveTo);
             this.Controls.Add(this.btn_broswer);
@@ -130,6 +133,7 @@
             this.Controls.Add(this.btn_startDownload);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,7 +148,7 @@
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.TextBox tb_saveTo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lb_logView;
         private System.Windows.Forms.Label label3;
     }
 }

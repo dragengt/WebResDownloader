@@ -19,6 +19,8 @@ namespace MyDebug
         static bool CONSOLE_LogToFile = false;       //是否打开输出日志文件功能
         static bool CONSOLE_PRINT_WARNING = true;  //是否向运行时的控制台输出警告
 
+        static Action<string> g_cbLogString = null;
+
         public static string GetCurrentDirectory()
         {
             return Environment.CurrentDirectory + "\\";
@@ -52,9 +54,31 @@ namespace MyDebug
             Warning,
         };
 
+        /// <summary>
+        /// 设置log时的回调
+        /// </summary>
+        public static void SetCallbackLogStr(Action<string> logAction)
+        {
+            g_cbLogString = logAction;
+        }
+
+        /// <summary>
+        /// 向控制台输出消息
+        /// </summary>
         public static void Log(string str)
         {
             PrintLine(str);
+        }
+
+        /// <summary>
+        /// 向用户端回调输出：
+        /// </summary>
+        /// <param name="str"></param>
+        public static void LogToUser(string str)
+        {
+
+            if (g_cbLogString != null)
+                g_cbLogString(str);
         }
 
         /// <summary>
